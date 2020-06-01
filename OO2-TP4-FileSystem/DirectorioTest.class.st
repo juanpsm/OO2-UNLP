@@ -10,7 +10,7 @@ Class {
 		'grande',
 		'backup2015'
 	],
-	#category : #'OO2-FileSystem'
+	#category : #'OO2-TP4-FileSystem'
 }
 
 { #category : #'as yet unclassified' }

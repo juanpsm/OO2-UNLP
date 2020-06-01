@@ -29,7 +29,7 @@ Class {
 		'socios',
 		'exporter'
 	],
-	#category : #'OO2-Biblioteca-Model'
+	#category : #'OO2-TP4-Biblioteca-Model'
 }
 
 { #category : #'as yet unclassified' }
