@@ -1,3 +1,27 @@
+"
+bib := Biblioteca new.
+s1 := Socio nombre: 'Socio1' email: 'socio1@smalltalk.com' legajo: '1111/1'.
+s2 := Socio nombre: 'Socio2' email: 'socio2@smalltalk.com' legajo: '2222/2'.
+s3 := Socio nombre: 'Socio3' email: 'socio3@smalltalk.com' legajo: '3333/3'.
+bib agregarSocio: s1; agregarSocio: s2; agregarSocio: s3.
+
+bib exportarSocios .
+
+col:= bib socios collect: [ :socio | Dictionary new at: #nombre put: (socio nombre);
+																	at: #email put: (socio email);
+																	at: #legajo put: (socio legajo);
+																	yourself ].
+asd := col collect: [ :dic | dic keys ].
+asd := col collect: [ :dic | dic keysSortedSafely  ].
+
+STON toStringPretty: col.
+STONJSON toStringPretty: col. ""no anda""
+NeoJSONWriter toStringPretty: col.
+
+bib exporter: NeoJsonExporter new.
+
+bib exportarSocios 
+"
 Class {
 	#name : #Biblioteca,
 	#superclass : #Object,
@@ -5,7 +29,7 @@ Class {
 		'socios',
 		'exporter'
 	],
-	#category : #'OO2-Biblioteca'
+	#category : #'OO2-Biblioteca-Model'
 }
 
 { #category : #'as yet unclassified' }

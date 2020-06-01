@@ -6,7 +6,7 @@ Class {
 		'email',
 		'legajo'
 	],
-	#category : #'OO2-Biblioteca'
+	#category : #'OO2-Biblioteca-Model'
 }
 
 { #category : #creation }

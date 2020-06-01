@@ -1,7 +1,7 @@
 Class {
 	#name : #VoorheesExporter,
-	#superclass : #Object,
-	#category : #'OO2-Biblioteca'
+	#superclass : #Exporter,
+	#category : #'OO2-Biblioteca-Model'
 }
 
 { #category : #exporting }
