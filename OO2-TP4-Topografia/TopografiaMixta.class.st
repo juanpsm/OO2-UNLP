@@ -27,7 +27,7 @@ TopografiaMixta >> calculateProportion [
 
 { #category : #'as yet unclassified' }
 TopografiaMixta >> drawAtX: x Y: y H: h W: w [
-	"figure borderWidth: 1.
+	"figure borderWidth: 2.
 	figure borderColor: (Color black)."
 	figure height: h.
 	figure width: w.
@@ -42,6 +42,17 @@ TopografiaMixta >> drawAtX: x Y: y H: h W: w [
 	figure addMorph: ((children at: 4) figure).
 	
 	^figure
+]
+
+{ #category : #comparing }
+TopografiaMixta >> equals: anotherTopografia [
+	self class = anotherTopografia class
+		ifTrue: [ children size = anotherTopografia getChildren size
+				ifTrue: [ ^ (children
+						with: anotherTopografia getChildren
+						collect: [ :c1 :c2 | c1 equals: c2 ]) allSatisfy: [ :e | e ] ] ]
+		ifFalse:
+			[ ^ self calculateProportion = anotherTopografia calculateProportion ]
 ]
 
 { #category : #'as yet unclassified' }

@@ -58,6 +58,11 @@ Topografia >> calculateProportion [
 	^ self subclassResponsibility.
 ]
 
+{ #category : #comparing }
+Topografia >> equals: anotherTopografia [
+^ self subclassResponsibility 
+]
+
 { #category : #accessing }
 Topografia >> figure [
 	^figure
