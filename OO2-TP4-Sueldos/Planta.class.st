@@ -19,3 +19,10 @@ Planta >> adicional [
 Planta >> basico [
 	^ 3000
 ]
+
+{ #category : #initialization }
+Planta >> initialize [ 
+	casado:= 0.
+	hijos:= 0.
+	años:= 0.
+]

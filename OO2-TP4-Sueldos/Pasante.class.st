@@ -17,3 +17,8 @@ Pasante >> adicional [
 Pasante >> basico [
 	^ 2000
 ]
+
+{ #category : #initialization }
+Pasante >> initialize [ 
+	examenes:= 0.
+]

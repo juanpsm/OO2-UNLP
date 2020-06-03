@@ -18,3 +18,10 @@ Temporario >> adicional [
 Temporario >> basico [
 	^ 4000 + (horas * 10)
 ]
+
+{ #category : #initialization }
+Temporario >> initialize [ 
+	casado:= 0.
+	hijos:= 0.
+	horas:= 0.
+]
