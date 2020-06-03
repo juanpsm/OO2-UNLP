@@ -138,14 +138,18 @@ TopografiaTest >> testequals [
 
 { #category : #'as yet unclassified' }
 TopografiaTest >> testgenerateRandom [
-|m canvas|
-m:= TopografiaMixta newWithRandomChildrenLevel: 0.
-
-canvas := Morph new
-color: (Color black alpha: 0.1);
-height: 420;
-width: 420.
-
-canvas addMorph: (m drawAtX: 10 Y: 10 H: 400 W: 400).
-canvas openInWindowLabeled: 'Topografia Aleatoria'.
+	| m canvas |
+	m := TopografiaMixta newWithRandomChildrenLevel: 0.
+	canvas := Morph new
+		color: (Color black alpha: 0.1);
+		height: 420;
+		width: 420.
+	canvas
+		addMorph:
+			(m
+				drawAtX: 10
+				Y: 10
+				H: 400
+				W: 400).
+	canvas openInWindowLabeled: 'Topografia Aleatoria'
 ]

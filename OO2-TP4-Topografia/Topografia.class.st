@@ -58,6 +58,15 @@ Topografia >> calculateProportion [
 	^ self subclassResponsibility.
 ]
 
+{ #category : #drawing }
+Topografia >> drawAtX: x Y: y H: h W: w [
+	"figure borderWidth: 1.
+	figure borderColor: (Color black)."
+	figure height: h.
+	figure width: w.
+	figure position: (x@y).
+]
+
 { #category : #comparing }
 Topografia >> equals: anotherTopografia [
 ^ self subclassResponsibility 
