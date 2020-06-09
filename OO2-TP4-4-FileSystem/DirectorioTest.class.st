@@ -10,7 +10,7 @@ Class {
 		'grande',
 		'backup2015'
 	],
-	#category : #'OO2-TP4-FileSystem-Tests'
+	#category : #'OO2-TP4-4-FileSystem-Tests'
 }
 
 { #category : #'as yet unclassified' }
@@ -156,9 +156,9 @@ DirectorioTest >> testListadoDeContenido [
 	self assert: conUnArchivo listadoDeContenido equals: '/var (1 archivo)'.
 	self assert: conVariosArchivos listadoDeContenido equals: '/tmp (4 archivos)'.
 	listadoStream := WriteStream on: String new.
-	listadoStream << '/log (1 archivos)'; cr.
+	listadoStream << '/log (1 archivo)'; cr.
 	listadoStream << '/log/mysql (4 archivos)'; cr.
-	listadoStream << '/log/mysql/older (1 archivos)'; cr.
+	listadoStream << '/log/mysql/older (1 archivo)'; cr.
 	listadoStream << '/log/postgres (3 archivos)'.
 	listado := listadoStream contents.
 	self assert: conSubdirectorios listadoDeContenido = listado

@@ -1,7 +1,11 @@
 Class {
 	#name : #Empleado,
 	#superclass : #Object,
-	#category : #'OO2-TP4-Sueldos'
+	#instVars : [
+		'porcentajeDescuentoBasico',
+		'porcentajeDescuentoAdicional'
+	],
+	#category : #'OO2-TP4-5-Sueldos-Model'
 }
 
 { #category : #'as yet unclassified' }
@@ -16,7 +20,13 @@ Empleado >> basico [
 
 { #category : #'as yet unclassified' }
 Empleado >> descuento [
- ^ self basico * 0.13 + self adicional * 0.5
+ ^ ((self basico * porcentajeDescuentoBasico) + (self adicional * porcentajeDescuentoAdicional))
+]
+
+{ #category : #initialization }
+Empleado >> initialize [
+	porcentajeDescuentoBasico := 0.13.
+	porcentajeDescuentoAdicional := 0.05
 ]
 
 { #category : #'as yet unclassified' }

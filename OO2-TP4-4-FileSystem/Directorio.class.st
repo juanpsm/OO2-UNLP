@@ -33,13 +33,13 @@ root := Directorio llamado: 'root' creadoEl: (Date today).
 "
 Class {
 	#name : #Directorio,
-	#superclass : #Object,
+	#superclass : #Component,
 	#instVars : [
 		'nombre',
 		'fechaCreacion',
 		'contenidos'
 	],
-	#category : #'OO2-TP4-FileSystem-Model'
+	#category : #'OO2-TP4-4-FileSystem-Model'
 }
 
 { #category : #'as yet unclassified' }
@@ -47,9 +47,14 @@ Directorio class >> llamado: unString creadoEl: unaFecha [
 	^(self new) nombre: unString fechaCreacion: unaFecha
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #'adding/removing' }
 Directorio >> agregar: unElemento [
 	contenidos add: unElemento
+]
+
+{ #category : #'as yet unclassified' }
+Directorio >> cantidadDeArchivos [
+^ (contenidos select: [ :e | e esArchivo ]) size.
 ]
 
 { #category : #'as yet unclassified' }
@@ -71,43 +76,51 @@ Directorio >> initialize [
 Directorio >> listadoDeContenido [
 	| stream |
 	stream := String new writeStream.
-	self listadoDeContenido: stream rutaPrevia: ''.
+	self listadoDeContenidoEnStream: stream rutaPrevia: ''.
 	^ stream contents
 ]
 
-{ #category : #'as yet unclassified' }
-Directorio >> listadoDeContenido: stream rutaPrevia: rutaPrevia [
+{ #category : #accessing }
+Directorio >> listadoDeContenidoEnStream: stream rutaPrevia: rutaPrevia [
 	| ruta |
-	stream cr.
 	ruta := rutaPrevia , '/' , nombre.
 	stream nextPutAll: ruta.
-	self tieneSubdirectorios
+	contenidos isNotEmpty
 		ifTrue: [ 
+			stream
+				nextPutAll: ' (';
+				print: self cantidadDeArchivos;
+				nextPutAll: ' archivo'.
+			self cantidadDeArchivos ~= 1
+				ifTrue: [ stream nextPutAll: 's' ].
+			stream nextPutAll: ')' ].
+	self tieneSubdirectorios
+		ifTrue: [ "stream contents trimRight."
+			
 			contenidos
-				do: [ :f | f listadoDeContenido: stream rutaPrevia: ruta ] ]
-		ifFalse: [ contenidos isNotEmpty
-				ifTrue: [ stream
-						nextPutAll: ' (';
-						print: contenidos size;
-						nextPutAll: ' archivo'.
-					contenidos size ~= 1
-						ifTrue: [ stream nextPutAll: 's' ].
-					stream
-						nextPutAll: ')'] ]
+				do: [ :f | 
+					f esArchivo
+						ifFalse: [ stream cr.
+							f listadoDeContenidoEnStream: stream rutaPrevia: ruta ] ] ]
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #setter }
 Directorio >> nombre: unString fechaCreacion: unaFecha [
 	nombre := unString.
 	fechaCreacion := unaFecha
 ]
 
+{ #category : #'adding/removing' }
+Directorio >> remover: unElemento [ 
+	contenidos remove: unElemento.
+]
+
 { #category : #'as yet unclassified' }
-Directorio >> tamanioTotalOcupado [
-	^ contenidos sumNumbers: [ :f | f tamanioTotalOcupado ]
+Directorio >> tamanio [
+	^ contenidos sumNumbers: [ :f | f tamanio ]
 ]
 
 { #category : #'as yet unclassified' }
 Directorio >> tieneSubdirectorios [
-	^ ((contenidos isNotEmpty) and: (contenidos allSatisfy: [ :e | e esArchivo not ]))
+	^ ((contenidos isNotEmpty) and: (contenidos anySatisfy: [ :e | e esArchivo not ]))
 ]

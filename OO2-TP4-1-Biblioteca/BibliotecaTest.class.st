@@ -7,7 +7,7 @@ Class {
 		's2',
 		's3'
 	],
-	#category : #'OO2-TP4-Biblioteca-Tests'
+	#category : #'OO2-TP4-1-Biblioteca-Tests'
 }
 
 { #category : #running }

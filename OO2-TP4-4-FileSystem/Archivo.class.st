@@ -1,12 +1,12 @@
 Class {
 	#name : #Archivo,
-	#superclass : #Object,
+	#superclass : #Component,
 	#instVars : [
 		'nombre',
 		'fechaCreacion',
 		'tamanio'
 	],
-	#category : #'OO2-TP4-FileSystem-Model'
+	#category : #'OO2-TP4-4-FileSystem-Model'
 }
 
 { #category : #'as yet unclassified' }
@@ -25,6 +25,11 @@ Archivo >> initialize [
 ]
 
 { #category : #'as yet unclassified' }
+Archivo >> listadoDeContenidoEnStream: stream rutaPrevia: rutaPrevia [
+
+]
+
+{ #category : #'as yet unclassified' }
 Archivo >> nombre: unString fechaCreacion: unaFecha tamanio: unNumero [
 	nombre := unString.
 	fechaCreacion := unaFecha.
@@ -32,6 +37,6 @@ Archivo >> nombre: unString fechaCreacion: unaFecha tamanio: unNumero [
 ]
 
 { #category : #'as yet unclassified' }
-Archivo >> tamanioTotalOcupado [
- ^tamanio 
+Archivo >> tamanio [
+	^ tamanio
 ]
