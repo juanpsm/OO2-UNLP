@@ -10,13 +10,18 @@ Class {
 }
 
 { #category : #'instance creation' }
-GraficoTopografia class >> newFrom: aTopografia [
-	^(aTopografia makeGrafico)
+GraficoTopografia class >> drawFrom: aTopografia [
+	^(aTopografia makeGrafico) draw
 ]
 
 { #category : #'instance creation' }
-GraficoTopografia class >> newFrom: aTopografia newName: aName [
-	^(aTopografia makeGrafico) newName: aName
+GraficoTopografia class >> drawFrom: aTopografia newName: aName [
+	^(aTopografia makeGrafico) newName: aName; draw.
+]
+
+{ #category : #'instance creation' }
+GraficoTopografia class >> newFrom: aTopografia [
+	^(aTopografia makeGrafico)
 ]
 
 { #category : #drawing }

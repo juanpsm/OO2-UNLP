@@ -1,3 +1,7 @@
+"
+""newWithRandomChildrenLevel: aNumber
+	^(self new) recursionLevel: aNumber; generateRandomChildren.""
+"
 Class {
 	#name : #GeneradorTopografia,
 	#superclass : #Object,
@@ -10,14 +14,39 @@ Class {
 }
 
 { #category : #'instance creation' }
-GeneradorTopografia class >> newWithRandomLevel: aNumber [
+GeneradorTopografia class >> newWithMaxDepth: aNumber [
+	^(self new) maxRecursion: aNumber.
+]
+
+{ #category : #'instance creation' }
+GeneradorTopografia class >> newWithRecursionLevel: aNumber [
 	^(self new) recursionLevel: aNumber.
+]
+
+{ #category : #'instance creation' }
+GeneradorTopografia class >> newWithRecursionLevel: aNumber max: anotherNumber [
+	^(self new) recursionLevel: aNumber; maxRecursion: anotherNumber.
+]
+
+{ #category : #'as yet unclassified' }
+GeneradorTopografia >> flipBit [
+ ^ ((0 to: 1) atRandom)
+]
+
+{ #category : #'as yet unclassified' }
+GeneradorTopografia >> flipCoin [
+ ^ (((0 to: 1) atRandom) = 0)
 ]
 
 { #category : #initialization }
 GeneradorTopografia >> initialize [
-	maxRecursionLevel := 10.
+	maxRecursionLevel := 5.
 	recursionLevel := 0.
+]
+
+{ #category : #accessing }
+GeneradorTopografia >> maxRecursion: aPositiveNumber [
+maxRecursionLevel := aPositiveNumber.
 ]
 
 { #category : #generators }
@@ -28,23 +57,26 @@ GeneradorTopografia >> random [
 ]
 
 { #category : #generators }
-GeneradorTopografia >> randomRecursive [
-	1 to: 4
-		do: [ :e | ((((0 to: 1) atRandom) = 0) or: (recursionLevel > maxRecursionLevel))
-				ifTrue:
-					[ "Es simple" 
-					topografia add: (TopografiaSimple newWithProportion: ((0 to: 1) atRandom) ) ]
-				ifFalse: 
-					[ "Es mixta"
-					topografia add: ((GeneradorTopografia newWithRandomLevel: (recursionLevel+1) ) random)]
-				]
-"newWithRandomChildrenLevel: aNumber
-	^(self new) recursionLevel: aNumber; generateRandomChildren."
+GeneradorTopografia >> randomEstricto [
+	"Este mensaje chequea en cada ciclo que no se haya creado un topografia complentamente del mismo color. En realidad en lugar de chequear, para no estar preguntado por las clases, las reemplaza siempre, si ya era simple la reemplaza por un nueva igual."
+	topografia := TopografiaMixta new.
+	self randomRecursive.
+	topografia calculateProportion = 0
+		ifTrue:[ topografia := (TopografiaSimple newWithProportion: 0)].
+	topografia calculateProportion = 1
+		ifTrue:[ topografia := (TopografiaSimple newWithProportion: 1)].
+	^ topografia
 ]
 
-{ #category : #accessing }
-GeneradorTopografia >> recursionLevel [
-	^ recursionLevel
+{ #category : #generators }
+GeneradorTopografia >> randomRecursive [
+	1 to: 4 do: [ :e | 
+		(self flipCoin or: recursionLevel >= maxRecursionLevel)
+			ifTrue: [ "Es simple" 
+				topografia add: (TopografiaSimple newWithProportion: self flipBit) ]
+			ifFalse: [ "Es mixta"
+				topografia
+					add: (self class newWithRecursionLevel: (recursionLevel + 1) max: maxRecursionLevel ) random ] ]
 ]
 
 { #category : #accessing }

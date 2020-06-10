@@ -20,16 +20,6 @@ GraficoTopografiaMixta class >> newFrom: aTopografia [
 		yourself
 ]
 
-{ #category : #'instance creation' }
-GraficoTopografiaMixta class >> newFrom: aTopografia newName: aName [
-	^ self new
-		topografia: aTopografia newName: aName;
-		addAll:
-			(aTopografia getChildren
-				collect: [ :c | GraficoTopografia newFrom: c]);
-		yourself
-]
-
 { #category : #adding }
 GraficoTopografiaMixta >> add: aComponent [
 	children add: aComponent 

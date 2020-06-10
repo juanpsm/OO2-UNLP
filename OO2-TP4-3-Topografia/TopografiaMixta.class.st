@@ -11,13 +11,8 @@ Class {
 }
 
 { #category : #'instance creation' }
-TopografiaMixta class >> newName: aName [
+TopografiaMixta class >> newWithName: aName [
 	^(self new) name: aName.
-]
-
-{ #category : #'instance creation' }
-TopografiaMixta class >> newWithRandomChildrenLevel: aNumber [
-	^(self new) recursionLevel: aNumber; generateRandomChildren.
 ]
 
 { #category : #adding }
@@ -36,13 +31,28 @@ TopografiaMixta >> compararConMixta: anotherTopografiaMixta [
 		ifTrue: [ ^ (children
 				with: anotherTopografiaMixta getChildren
 				collect: [ :c1 :c2 | c1 equals: c2 ]) allSatisfy: [ :each | each ] ]
+			"Crea una colección en donde se agrupan los resultados de haber comparado uno a uno cada hijo, y luego verifica que sean todos verdaderos estos elementos"
 ]
 
 { #category : #comparing }
 TopografiaMixta >> compararConSimple: topografiaSimple [
-	^ (self calculateProportion = topografiaSimple calculateProportion)
-	"^ false."
+	^ false
 	
+]
+
+{ #category : #comparing }
+TopografiaMixta >> compararFelxibleConSimple: topografiaSimple [
+	"Toma a una topografia con 4 partes iguales como igual a una simple del mismo material"
+	^ (self calculateProportion = topografiaSimple calculateProportion)
+]
+
+{ #category : #comparing }
+TopografiaMixta >> compararFlexibleConMixta: anotherTopografiaMixta [
+	children size = anotherTopografiaMixta getChildren size
+		ifTrue: [ ^ (children
+				with: anotherTopografiaMixta getChildren
+				collect: [ :c1 :c2 | c1 equalsFlexible: c2 ]) allSatisfy: [ :each | each ] ]
+			"Crea una colección en donde se agrupan los resultados de haber comparado uno a uno cada hijo, y luego verifica que sean todos verdaderos estos elementos"
 ]
 
 { #category : #comparing }
@@ -50,18 +60,9 @@ TopografiaMixta >> equals: anotherTopografia [
 	^ anotherTopografia compararConMixta: self.
 ]
 
-{ #category : #generators }
-TopografiaMixta >> generateRandomChildren [
-	1 to: 4
-		do: [ :e | ((((0 to: 1) atRandom) = 0) or: (recursionLevel > maxRecursionLevel))
-				ifTrue:
-					[ "Es simple" 
-					self add: (TopografiaSimple newWithProportion: ((0 to: 1) atRandom) ) ]
-				ifFalse: 
-					[ "Es mixta"
-					self add: (self class newWithRandomChildrenLevel: (recursionLevel+1))
-					]
-				]
+{ #category : #comparing }
+TopografiaMixta >> equalsFlexible: anotherTopografia [
+	^ anotherTopografia compararFlexibleConMixta: self
 ]
 
 { #category : #acccessing }
@@ -71,7 +72,6 @@ TopografiaMixta >> getChildren [
 
 { #category : #initialization }
 TopografiaMixta >> initialize [
-	super initialize.
 	children:= OrderedCollection new.
 ]
 

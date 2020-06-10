@@ -93,24 +93,18 @@ TopografiaTest >> testequals [
 	self assert: [ tsagua equals: tsagua2 ].
 	self deny: [ tsagua equals: tstierra ].
 	
-	"Considera cuatro topografias simples iguales, igual a una topografia de la misma proporción"
-	self assert: [ tmMal equals: tmBien ]
+	"Considera cuatro topografias simples del mismo material, distinta a una topografia simple de la misma proporción"
+	self deny: [ tmMal equals: tmBien ]
 ]
 
 { #category : #'as yet unclassified' }
-TopografiaTest >> testgenerateRandom [
-	| m canvas |
-	m := TopografiaMixta newWithRandomChildrenLevel: 0.
-	canvas := Morph new
-		color: (Color black alpha: 0.1);
-		height: 420;
-		width: 420.
-	canvas
-		addMorph:
-			(m
-				drawAtX: 10
-				Y: 10
-				H: 400
-				W: 400).
-	canvas openInWindowLabeled: 'Topografia Aleatoria'
+TopografiaTest >> testequalsFlexible [
+
+	self deny:[tm1 equalsFlexible: tm2].
+	self assert:[tm3 equalsFlexible: tm3igual].
+	self assert: [ tsagua equalsFlexible: tsagua2 ].
+	self deny: [ tsagua equalsFlexible: tstierra ].
+	
+	"Considera cuatro topografias simples iguales, igual a una topografia de la misma proporción"
+	self assert: [ tmMal equalsFlexible: tmBien ]
 ]

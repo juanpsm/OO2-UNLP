@@ -45,10 +45,6 @@ Class {
 	#name : #Topografia,
 	#superclass : #Object,
 	#instVars : [
-		'proportion',
-		'recursionLevel',
-		'maxRecursionLevel',
-		'figure',
 		'name'
 	],
 	#category : #'OO2-TP4-3-Topografia-Model'
@@ -64,10 +60,9 @@ Topografia >> equals: anotherTopografia [
 	^ self subclassResponsibility
 ]
 
-{ #category : #initialization }
-Topografia >> initialize [
-	maxRecursionLevel := 10.
-	figure := Morph new.
+{ #category : #comparing }
+Topografia >> equalsFlexible: anotherTopografia [
+	^ self subclassResponsibility
 ]
 
 { #category : #accessing }
@@ -78,19 +73,4 @@ Topografia >> name [
 { #category : #accessing }
 Topografia >> name: aName [
 	name := aName
-]
-
-{ #category : #accessing }
-Topografia >> proportion: aNumber [
-	proportion := aNumber
-]
-
-{ #category : #accessing }
-Topografia >> recursionLevel [
-	^ recursionLevel
-]
-
-{ #category : #accessing }
-Topografia >> recursionLevel: aNumber [ 
-	recursionLevel := aNumber 
 ]
