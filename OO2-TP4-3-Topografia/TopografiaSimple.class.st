@@ -57,6 +57,11 @@ TopografiaSimple >> equalsFlexible: anotherTopografia [
 	
 ]
 
+{ #category : #initialization }
+TopografiaSimple >> initialize [
+	depth:= 0.
+]
+
 { #category : #'as yet unclassified' }
 TopografiaSimple >> makeGrafico [
 	^ 	(GraficoTopografiaSimple newFrom: self) 

@@ -8,7 +8,8 @@ Class {
 	#instVars : [
 		'recursionLevel',
 		'maxRecursionLevel',
-		'topografia'
+		'topografia',
+		'depth'
 	],
 	#category : #'OO2-TP4-3-Topografia-Generator'
 }
@@ -28,6 +29,18 @@ GeneradorTopografia class >> newWithRecursionLevel: aNumber max: anotherNumber [
 	^(self new) recursionLevel: aNumber; maxRecursion: anotherNumber.
 ]
 
+{ #category : #accessing }
+GeneradorTopografia >> depth [
+	^ depth
+]
+
+{ #category : #accessing }
+GeneradorTopografia >> depth: aNumber [
+	"La profundidad solo puede aumentar"
+
+	depth := depth max: aNumber
+]
+
 { #category : #'as yet unclassified' }
 GeneradorTopografia >> flipBit [
  ^ ((0 to: 1) atRandom)
@@ -42,6 +55,7 @@ GeneradorTopografia >> flipCoin [
 GeneradorTopografia >> initialize [
 	maxRecursionLevel := 5.
 	recursionLevel := 0.
+	depth := 0.
 ]
 
 { #category : #accessing }
@@ -70,13 +84,24 @@ GeneradorTopografia >> randomEstricto [
 
 { #category : #generators }
 GeneradorTopografia >> randomRecursive [
+	|subGenerator|
+	self depth: 1.
 	1 to: 4 do: [ :e | 
-		(self flipCoin or: recursionLevel >= maxRecursionLevel)
+		(self flipCoin or: (recursionLevel >= (maxRecursionLevel-1)))
 			ifTrue: [ "Es simple" 
-				topografia add: (TopografiaSimple newWithProportion: self flipBit) ]
+				topografia add: (TopografiaSimple newWithProportion: self flipBit) 
+			]
 			ifFalse: [ "Es mixta"
-				topografia
-					add: (self class newWithRecursionLevel: (recursionLevel + 1) max: maxRecursionLevel ) random ] ]
+				subGenerator := self class newWithRecursionLevel: (recursionLevel + 1) max: maxRecursionLevel.
+				topografia add: subGenerator random.
+				self depth: (subGenerator depth + 1). 
+			] 
+	]
+]
+
+{ #category : #accessing }
+GeneradorTopografia >> recursionLevel [
+	^ recursionLevel
 ]
 
 { #category : #accessing }

@@ -73,6 +73,7 @@ TopografiaMixta >> getChildren [
 { #category : #initialization }
 TopografiaMixta >> initialize [
 	children:= OrderedCollection new.
+	depth := 1.
 ]
 
 { #category : #'as yet unclassified' }

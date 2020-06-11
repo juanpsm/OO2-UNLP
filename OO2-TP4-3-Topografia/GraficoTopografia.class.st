@@ -4,6 +4,7 @@ Class {
 	#instVars : [
 		'topografia',
 		'figure',
+		'window',
 		'newName'
 	],
 	#category : #'OO2-TP4-3-Topografia-Graficos'
@@ -22,6 +23,11 @@ GraficoTopografia class >> drawFrom: aTopografia newName: aName [
 { #category : #'instance creation' }
 GraficoTopografia class >> newFrom: aTopografia [
 	^(aTopografia makeGrafico)
+]
+
+{ #category : #'initialize-release' }
+GraficoTopografia >> close [
+	window close.
 ]
 
 { #category : #drawing }
@@ -44,7 +50,7 @@ GraficoTopografia >> draw [
 	nextPutAll: ' (prop: ';
 	print: topografia calculateProportion;
 	nextPutAll: ' )'.
-	canvas openInWindowLabeled: label contents withBlanksCondensed.
+	window:= canvas openInWindowLabeled: label contents withBlanksCondensed.
 ]
 
 { #category : #drawing }
@@ -95,4 +101,9 @@ GraficoTopografia >> newName: aName [
 GraficoTopografia >> topografia: aTopografia newName: aName [
 	topografia := aTopografia.
 	newName := aName
+]
+
+{ #category : #accessing }
+GraficoTopografia >> window [
+	^ window
 ]

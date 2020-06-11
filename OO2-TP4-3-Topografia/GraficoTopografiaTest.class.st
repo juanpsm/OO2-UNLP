@@ -22,12 +22,34 @@ GraficoTopografiaTest >> setUp [
 ]
 
 { #category : #drawing }
-GraficoTopografiaTest >> testdraw [
-	gtm1:= GraficoTopografia drawFrom: tm1 newName: 'tm1'.
-	gtm2:= GraficoTopografia drawFrom: tm2 newName: 'tm2'.
-	gtm3:= GraficoTopografia drawFrom: tm3 newName: 'tm3'.
-	gtsagua:= GraficoTopografia drawFrom: tsagua newName: 'tstierra'.
-	gtstierra:= GraficoTopografia drawFrom: tstierra newName: 'tstierra'.
-	gtmMal:= GraficoTopografia drawFrom: tmMal newName: 'tmMal'.
-	gtmBien:= GraficoTopografia drawFrom: tmBien newName: 'tmBien'.
+GraficoTopografiaTest >> testCloseAll [
+	Transcript show: self class instVarNames.
+	gtm1 close.
+	gtm2 close.
+	gtm3 close.
+	gtsagua close.
+	gtstierra close.
+	gtmMal close.
+	gtmBien close.
+	
+]
+
+{ #category : #drawing }
+GraficoTopografiaTest >> testDelete [
+	gtm1:= GraficoTopografia newFrom: tm1.
+	
+	gtm1 draw.
+	
+	gtm1 window close
+]
+
+{ #category : #drawing }
+GraficoTopografiaTest >> testDraw [
+	gtm1:= GraficoTopografia drawFrom: tm1.
+	gtm2:= GraficoTopografia drawFrom: tm2.
+	gtm3:= GraficoTopografia drawFrom: tm3.
+	gtsagua:= GraficoTopografia drawFrom: tsagua.
+	gtstierra:= GraficoTopografia drawFrom: tstierra.
+	gtmMal:= GraficoTopografia drawFrom: tmMal.
+	gtmBien:= GraficoTopografia drawFrom: tmBien.
 ]

@@ -1,6 +1,6 @@
 Class {
 	#name : #TopografiaTest,
-	#superclass : #TestCase,
+	#superclass : #TestCaseLogInFile,
 	#instVars : [
 		'tm1',
 		'tm2',
@@ -17,8 +17,9 @@ Class {
 
 { #category : #running }
 TopografiaTest >> setUp [
+	super setUp.
 	tm1:= TopografiaMixta new.
-	tm1 add:((TopografiaMixta new) add: (TopografiaSimple newWithProportion: 1);
+	tm1 add:((TopografiaMixta newWithName: 'Top Mixta 1') add: (TopografiaSimple newWithProportion: 1);
 											add: (TopografiaSimple newWithProportion: 1);
 											add: (TopografiaSimple newWithProportion: 0);
 											add: (TopografiaSimple newWithProportion: 0)
@@ -28,7 +29,7 @@ TopografiaTest >> setUp [
 	add: (TopografiaSimple newWithProportion: 0).
 	
 	tm2:= TopografiaMixta new.
-	tm2 add:((TopografiaMixta new) add: (TopografiaSimple newWithProportion: 1);
+	tm2 add:((TopografiaMixta newWithName: 'Top Mixta 2') add: (TopografiaSimple newWithProportion: 1);
 											add: (TopografiaSimple newWithProportion: 1);
 											add: (TopografiaSimple newWithProportion: 0);
 											add: (TopografiaSimple newWithProportion: 0)
@@ -37,7 +38,7 @@ TopografiaTest >> setUp [
 	add: (TopografiaSimple newWithProportion: 1);
 	add: (TopografiaSimple newWithProportion: 0).
 	
-	tm3:= TopografiaMixta new.
+	tm3:= TopografiaMixta newWithName: 'Top Mixta 3'.
 	tm3 add:((TopografiaMixta new) add: (TopografiaSimple newWithProportion: 0);
 											add: (TopografiaSimple newWithProportion: 0);
 											add: (TopografiaSimple newWithProportion: 1);
@@ -57,11 +58,11 @@ TopografiaTest >> setUp [
 	add: (TopografiaSimple newWithProportion: 0);
 	add: (TopografiaSimple newWithProportion: 1).
 	
-	tsagua:= TopografiaSimple newWithProportion: 1.
-	tsagua2:= TopografiaSimple newWithProportion: 1.
-	tstierra:= TopografiaSimple newWithProportion: 0.
+	tsagua:= TopografiaSimple newWithName: 'Top Simple Agua' Proportion: 1.
+	tsagua2:= TopografiaSimple newWithName: 'Top Simple Agua 2' Proportion: 1.
+	tstierra:= TopografiaSimple newWithName: 'Top Simple Tierra' Proportion: 0.
 	
-	tmMal:= TopografiaMixta new.
+	tmMal:= TopografiaMixta newWithName: 'Top Mixta Mal'.
 	tmMal add:((TopografiaMixta new) add: (TopografiaSimple newWithProportion: 0);
 											add: (TopografiaSimple newWithProportion: 0);
 											add: (TopografiaSimple newWithProportion: 0);
@@ -71,7 +72,7 @@ TopografiaTest >> setUp [
 	add: (TopografiaSimple newWithProportion: 0);
 	add: (TopografiaSimple newWithProportion: 1).
 	
-	tmBien := TopografiaMixta new.
+	tmBien := TopografiaMixta newWithName: 'Top Mixta '.
 	tmBien add: (TopografiaSimple newWithProportion: 0);
 	add: (TopografiaSimple newWithProportion: 0);
 	add: (TopografiaSimple newWithProportion: 0);
