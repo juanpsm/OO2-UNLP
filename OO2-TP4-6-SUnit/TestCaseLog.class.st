@@ -6,7 +6,7 @@ Class {
 
 { #category : #accessing }
 TestCaseLog >> log [
-	self subclassResponsibility 
+	^ self subclassResponsibility
 ]
 
 { #category : #running }
