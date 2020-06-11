@@ -1,3 +1,13 @@
+"
+Transcript
+		cr; show:'--- start ---'; 
+		show: DateAndTime now ; cr; flush.
+disp := Dispositivo new.
+disp send: 'banana' .				
+Transcript
+		show:'---- end ----';
+		show: DateAndTime now ; cr; flush.
+"
 Class {
 	#name : #Dispositivo,
 	#superclass : #Object,
@@ -17,6 +27,7 @@ Dispositivo >> conectarCon: unaConexion [
 		show: self printString;
 		show: ' recibe mensaje conectarCon: ';
 		show: unaConexion printString;
+		show: '.';
 		cr;
 		flush.
 	connection := unaConexion.
@@ -32,9 +43,15 @@ Dispositivo >> configurarCRC: unCRCcalculator [
 		show: self;
 		show: ' recibe mensaje configurarCRC: ';
 		show: unCRCcalculator printString;
+		show: '.';
 		cr;
 		flush.
 	crcCalculator := unCRCcalculator
+]
+
+{ #category : #accessing }
+Dispositivo >> connection [
+	^ connection 
 ]
 
 { #category : #accessing }
@@ -54,6 +71,7 @@ Dispositivo >> initialize [
 		show: crcCalculator printString;
 		show: ' y ';
 		show: connection printString;
+		show: '.';
 		cr;
 		flush
 ]
@@ -64,18 +82,28 @@ Dispositivo >> send: aString [
 	crc := crcCalculator crcFor: aString.
 	connection sendData: aString Crc:  crc.
 	Transcript 
+		show: '-- send body --'; cr;
 		show: self printString;
 		show: ' recibe mensaje send: "';
 		show: aString;
-		show: '" y responde enviando CRC "';
+		show: '",';
+		cr;
+		show: 'envia a su ';
+		show: crcCalculator printString;
+		show: ' el mensaje crcFor: "';
+		show: aString;
+		show: '"';
+		cr;
+		show: 'y luego usando la conexion ';
+		show: connection printString;
+		show: ', ';
+		cr;
+		show: 'manda sendData: "';
+		show: aString;
+		show: '" Crc: "';
 		show: crc;
-		show: ' ';
+		show: '".';
 		cr;
-		show: 'usando la conexion';
-		show: connection class printString;
-		show: ' y la codificacion ';
-		show: crcCalculator class printString;
-		show: '.';
-		cr;
+		show: '-- send send --'; cr;
 		flush 
 ]

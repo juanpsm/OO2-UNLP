@@ -10,6 +10,13 @@ Class {
 { #category : #initialization }
 FourGConnection >> initialize [
 	symb := Morph new color: Color yellow. 
+	Transcript
+		show: self printString;
+		show: ' se instancia con symb: ';
+		show: symb;
+		show: '.';
+		cr;
+		flush
 ]
 
 { #category : #accessing }
@@ -22,11 +29,11 @@ FourGConnection >> sendData: aString Crc: aNumber [
 	self tansmit: aString Crc: aNumber.
 	Transcript
 		show: self printString;
-		show: ' recibe el mensaje transmit: String "';
+		show: ' recibe el mensaje sendData: "';
 		show: aString;
-		show: '" y CRC "';
+		show: '" Crc: "';
 		show: aNumber;
-		show: '"';
+		show: '".';
 		cr;
 		flush
 ]
@@ -38,13 +45,13 @@ FourGConnection >> symb [
 
 { #category : #'as yet unclassified' }
 FourGConnection >> tansmit: aString Crc: aNumber [
-Transcript 
+Transcript
 		show: self printString;
-		show: ' recibe el mensaje transmit: String "';
+		show: ' recibe el mensaje transmit: "';
 		show: aString;
-		show: '" y CRC "';
+		show: '" Crc: "';
 		show: aNumber;
-		show: '"';
+		show: '".';
 		cr;
-		flush 
+		flush
 ]

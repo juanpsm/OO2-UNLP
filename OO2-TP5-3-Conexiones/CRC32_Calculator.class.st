@@ -8,9 +8,9 @@ Class {
 CRC32_Calculator >> crcFor: aString [
 	Transcript
 		show: self printString;
-		show: ' recibe el mensaje crcFor: String "';
+		show: ' recibe el mensaje crcFor: "';
 		show: aString;
-		show: '.';
+		show: '".';
 		cr;
 		flush.
 	^ CRC crc32FromCollection: aString.

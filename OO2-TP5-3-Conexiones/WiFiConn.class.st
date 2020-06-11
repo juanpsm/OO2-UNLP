@@ -9,7 +9,14 @@ Class {
 
 { #category : #accessing }
 WiFiConn >> initialize [
-	pict := Morph new color: Color red
+	pict := Morph new color: Color red.
+	Transcript
+		show: self printString;
+		show: ' se instancia con pict: ';
+		show: pict;
+		show: '.';
+		cr;
+		flush
 ]
 
 { #category : #accessing }
@@ -19,13 +26,13 @@ WiFiConn >> pict [
 
 { #category : #'as yet unclassified' }
 WiFiConn >> sendData: aString Crc: aNumber [
-Transcript 
+Transcript
 		show: self printString;
-		show: ' recibe el mensaje sendData: String "';
+		show: ' recibe el mensaje sendData: "';
 		show: aString;
-		show: '" y CRC "';
+		show: '" Crc: "';
 		show: aNumber;
-		show: '"';
+		show: '".';
 		cr;
-		flush 
+		flush
 ]

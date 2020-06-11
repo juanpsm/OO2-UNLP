@@ -10,7 +10,7 @@ SampledSound beep.
 "(FMSound lowMajorScaleOn: FMSound clarinet) play"
 Transcript 
 		show: self printString;
-		show: ' recibe el mensaje ring';
+		show: ' recibe el mensaje ring.';
 		cr;
 		flush 
 ]

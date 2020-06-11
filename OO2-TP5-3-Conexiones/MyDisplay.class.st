@@ -20,6 +20,7 @@ MyDisplay >> showBanner: img [
 		show: self printString;
 		show: ' recibe el mensaje showBanner: "';
 		show: img;
+		show: '".';
 		cr;
 		flush 
 ]
