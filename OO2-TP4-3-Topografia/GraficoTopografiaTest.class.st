@@ -16,13 +16,8 @@ Class {
 	#category : #'OO2-TP4-3-Topografia-Tests'
 }
 
-{ #category : #running }
-GraficoTopografiaTest >> setUp [
-	super setUp.
-]
-
 { #category : #drawing }
-GraficoTopografiaTest >> testCloseAll [
+GraficoTopografiaTest >> CloseAll [
 	Transcript show: self class instVarNames.
 	gtm1 close.
 	gtm2 close.
@@ -32,6 +27,11 @@ GraficoTopografiaTest >> testCloseAll [
 	gtmMal close.
 	gtmBien close.
 	
+]
+
+{ #category : #running }
+GraficoTopografiaTest >> setUp [
+	super setUp.
 ]
 
 { #category : #drawing }

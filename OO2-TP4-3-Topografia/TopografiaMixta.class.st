@@ -22,16 +22,18 @@ TopografiaMixta >> add: aComponent [
 
 { #category : #calculations }
 TopografiaMixta >> calculateProportion [
-	^ ((children sumNumbers: [:c| c calculateProportion]) / (children size) )
+	^ (children sumNumbers: [ :c | c calculateProportion ])
+		/ children size
 ]
 
 { #category : #comparing }
 TopografiaMixta >> compararConMixta: anotherTopografiaMixta [
+"Crea una colección en donde se agrupan los resultados de haber comparado uno a uno cada hijo, y luego verifica que sean todos verdaderos estos elementos" 
 	children size = anotherTopografiaMixta getChildren size
 		ifTrue: [ ^ (children
 				with: anotherTopografiaMixta getChildren
 				collect: [ :c1 :c2 | c1 equals: c2 ]) allSatisfy: [ :each | each ] ]
-			"Crea una colección en donde se agrupan los resultados de haber comparado uno a uno cada hijo, y luego verifica que sean todos verdaderos estos elementos"
+		ifFalse: [ ^ false ]
 ]
 
 { #category : #comparing }
@@ -73,7 +75,6 @@ TopografiaMixta >> getChildren [
 { #category : #initialization }
 TopografiaMixta >> initialize [
 	children:= OrderedCollection new.
-	depth := 1.
 ]
 
 { #category : #'as yet unclassified' }
